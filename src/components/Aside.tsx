@@ -7,6 +7,7 @@ import { useDataContext } from '../contexts';
 import { ModalChildProps } from '../interfaces';
 import { capitalizeFirstCharOfWord } from '../utils';
 import { apiUploadFile } from '../utils/useApi';
+import { SERVER_BASEURL } from '../config/config';
 
 const Aside = ({ modalChild }: ModalChildProps) => {
   const [activeID, setActiveID] = useState(1);
@@ -102,7 +103,7 @@ const Aside = ({ modalChild }: ModalChildProps) => {
         <div className="flex gap-1">
           <div className="relative flex justify-center items-center ">
             <div className="flex w-10 h-10 rounded-full overflow-hidden cursor-pointer" onClick={handleAvatarClick}>
-              {userData.avatar ? <img src={`${import.meta.env.VITE_SERVER_BASEURL}${userData.avatar}`} alt="avatar" className='object-fill' /> : <AccountCircle />}
+              {userData.avatar ? <img src={`${SERVER_BASEURL}${userData.avatar}`} alt="avatar" className='object-fill' /> : <AccountCircle />}
               <input
                 type='file'
                 ref={fileInputRef}

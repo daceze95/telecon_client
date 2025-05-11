@@ -1,4 +1,5 @@
 import { SendIcon } from "../assets/svg";
+import { SERVER_BASEURL } from "../config/config";
 import { useDataContext } from "../contexts"
 import ActiveChatHeader from "./ActiveChatHeader";
 import { IconHolder } from "./IconHolder";
@@ -20,12 +21,12 @@ const ActiveChat = () => {
 
         {/* sender */}
         <div className="container shadow max-w-2/5 bg-slate-50 p-2 flex flex-col items-end self-end rounded-sm">
-          <img src={`${import.meta.env.VITE_SERVER_BASEURL}${userData.avatar}`} alt="Avatar" className="w-8 h-8 rounded-full border"/>
+          <img src={`${SERVER_BASEURL}${userData.avatar}`} alt="Avatar" className="w-8 h-8 rounded-full border"/>
           <p className="text-right my-1">Hey! I'm fine. Thanks for asking! Lorem ipsum dolor sit amet consectetur adipisicing elit. Non dolore quidem facere omnis rem, repellat, fugit labore quia ipsam ducimus voluptatum! Error odit reprehenderit, alias laboriosam molestiae magni odio inventore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, incidunt impedit non explicabo possimus placeat saepe, maiores repudiandae dicta consectetur, culpa suscipit nostrum illum! Quis placeat provident porro voluptas similique.</p>
           <span className="w-full text-left text-sm text-slate-400">11:01</span>
         </div>
         <div className="container shadow max-w-2/5 bg-slate-50 p-2 flex flex-col items-end self-end rounded-sm">
-          <img src={`${import.meta.env.VITE_SERVER_BASEURL}${userData.avatar}`} alt="Avatar" className="w-8 h-8 rounded-full border"/>
+          <img src={`${SERVER_BASEURL}${userData.avatar}`} alt="Avatar" className="w-8 h-8 rounded-full border"/>
           <p className="text-right my-1">Hey! I'm fine. Thanks for asking! Lorem ipsum dolor sit amet consectetur adipisicing elit. Non dolore quidem facere omnis rem, repellat, fugit labore quia ipsam ducimus voluptatum! Error odit reprehenderit, alias laboriosam molestiae magni odio inventore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, incidunt impedit non explicabo possimus placeat saepe, maiores repudiandae dicta consectetur, culpa suscipit nostrum illum! Quis placeat provident porro voluptas similique.</p>
           <span className="w-full text-left text-sm text-slate-400">11:01</span>
         </div>

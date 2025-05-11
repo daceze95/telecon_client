@@ -2,6 +2,7 @@ import { useDataContext } from '../contexts'
 import { useOutletContext } from 'react-router-dom';
 import { AccountCircle } from '../assets/svg';
 import { capitalizeFirstCharOfWord } from '../utils';
+import { SERVER_BASEURL } from '../config/config';
 
 const LandingPage = () => {
     const { toggleModalVisibility, userData } = useDataContext();
@@ -14,7 +15,7 @@ const LandingPage = () => {
                     <div className="flex gap-4">
                         <div className="relative flex justify-center items-center">
                             <div className="w-[6.25rem] h-[6.25rem] flex overflow-hidden rounded-full border">
-                               { userData.avatar ? <img src={`${import.meta.env.VITE_SERVER_BASEURL}${userData.avatar}`} alt="avatar" className='object-fill'/> : <AccountCircle />}
+                               { userData.avatar ? <img src={`${SERVER_BASEURL}${userData.avatar}`} alt="avatar" className='object-fill'/> : <AccountCircle />}
                             </div>
                             {/* <div className="absolute bottom-3 right-1 w-4 h-4 rounded-full bg-orange-300"></div> */}
                         </div>

@@ -1,4 +1,5 @@
 import { AccountCircle, CallIcon, PersonPlusOne, SearchIcon, SettingsIcon } from "../assets/svg"
+import { SERVER_BASEURL } from "../config/config"
 import { UserDataProps } from '../interfaces'
 import { IconHolder } from './IconHolder'
 
@@ -22,7 +23,7 @@ const ActiveChatHeader = ({ userData }: { userData: UserDataProps }) => {
             <div className="flex gap-1 mr-auto">
                 <div className="relative flex items-center ">
                     <div className="flex w-10 h-10 rounded-full overflow-hidden border">
-                        {userData.avatar ? <img src={`${import.meta.env.VITE_SERVER_BASEURL}${userData.avatar}`} alt="avatar" className='object-fill' /> : <AccountCircle />}
+                        {userData.avatar ? <img src={`${SERVER_BASEURL}${userData.avatar}`} alt="avatar" className='object-fill' /> : <AccountCircle />}
                     </div>
 
                     <div className="absolute bottom-1 right-0 w-3 h-3 rounded-full bg-orange-300"></div>

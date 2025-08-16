@@ -25,8 +25,6 @@ const ActiveChatHeader = ({ userData }: { userData: UserDataProps }) => {
                     <div className="flex w-10 h-10 rounded-full overflow-hidden border">
                         {userData.avatar ? <img src={`${SERVER_BASEURL}${userData.avatar}`} alt="avatar" className='object-fill' /> : <AccountCircle />}
                     </div>
-
-                    <div className="absolute bottom-1 right-0 w-3 h-3 rounded-full bg-orange-300"></div>
                 </div>
                 <div className="flex flex-col justify-between">
                     <p className="flex gap-2 text-sm">

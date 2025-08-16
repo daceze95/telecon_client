@@ -22,7 +22,7 @@ interface Users {
 const Chats = () => { //{ name, notificationCount }: ChatProps
     const [users, setUsers] = useState<Users[]>([]);
     const [loading, setLoading] = useState(true);  // loading state
-    const [error, setError] = useState<string | null>(null);  // error state
+    const [, setError] = useState<string | null>(null);  // error state
     const notificationCount = 0
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const Chats = () => { //{ name, notificationCount }: ChatProps
                 </div>
             </div>
             {/* TODO: */}
-            <div className="w-full flex flex-col flex-1 overflow-y-scroll gap-2 py-2">
+            <div className="w-full flex flex-col flex-1 overflow-y-auto gap-2 py-2">
                 {users.map((user) => (
                     <Link to={`/${user._id}`} key={`${user._id}`}>
                         <div className="flex justify-between cursor-pointer hover:bg-slate-200 py-2 px-0.5 rounded-sm">

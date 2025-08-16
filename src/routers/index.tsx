@@ -7,6 +7,7 @@ import ProtectRoute from '../contexts/ProtectRoute';
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import ActiveChat from "../components/ActiveChat";
+import ForgotPassword from "../pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -37,13 +38,17 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+  },
+  {
     path: "/grant-permission",
     element: <GrantPermission />,
   },
   {
-    path: "join",
+    path: "/join",
     element: <Join />,
-  },
+  }
 ]);
 
 export default router;

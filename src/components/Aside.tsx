@@ -51,7 +51,8 @@ const Aside = ({ modalChild }: ModalChildProps) => {
 
   const logout = () => {
     localStorage.clear();
-    navigate('/', { replace: true })
+    console.log("Logout was activated")
+    navigate('/login', { replace: true })
   }
 
 
@@ -69,8 +70,6 @@ const Aside = ({ modalChild }: ModalChildProps) => {
       // Optional: Upload logic
       const formData = new FormData();
       formData.append('avatar', file, file.name);
-
-      console.log(formData)
 
       const uploaded = await apiUploadFile(`/users/upload-profile`, formData);
 

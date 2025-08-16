@@ -1,17 +1,71 @@
 // import { FormEvent, useEffect, useState } from "react";
+import { FormEventHandler, ReactNode } from "react";
 import Navbar from "../components/Navbar";
 // import InputField from "../components/InputField";
 // import { KeyValueProps } from "../interfaces";
 // import { apiPost } from "../utils/UseAuth";
 import { Link, useLocation } from "react-router-dom";
 
+interface FormType {title: string; children: ReactNode; onSubmit: FormEventHandler<HTMLFormElement>; loading: boolean}
 
-function Form({ title, children, onSubmit, loading }) {
+function Form({ title, children, onSubmit, loading }:FormType) {
   const { pathname } = useLocation();
 
-  return (
-    (<div className="flex flex-col w-full h-dvh">
+  let Elem;
 
+  switch (pathname) {
+    case "/register":
+      Elem = (
+        <>
+          <Button loading={loading}>
+            {loading ? "Submitting..." : "Submit"}
+          </Button>
+          <p className="text-sm m-0 text-center">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-xs underline cursor-pointer text-blue-500"
+            >
+              Login
+            </Link>
+          </p>
+        </>
+      );
+      break;
+
+    case "/login":
+      Elem = (
+        <>
+          <>
+            <Link
+              to="/forgot-password"
+              className="text-sm cursor-pointer hover:text-blue-500 hover:underline"
+            >
+              Forgot your password?
+            </Link>
+            <Button loading={loading}>
+              {loading ? "Logging..." : "Login"}
+            </Button>
+          </>
+          <p className="text-sm m-0 text-center">
+            Don't have an account?{" "}
+            <Link
+              to="/register"
+              className="text-xs underline cursor-pointer text-blue-500"
+            >
+              Register
+            </Link>
+          </p>
+        </>
+      );
+      break;
+
+    default:
+      break;
+  }
+
+  return (
+    <div className="flex flex-col w-full h-dvh">
       {/* Main Navbar */}
       <Navbar />
 
@@ -21,34 +75,49 @@ function Form({ title, children, onSubmit, loading }) {
           <p className="text-sm text-white">Getting you connected...</p>
         </div>
         <div className="flex-1 flex items-center w-full p-2">
-          <form className="border rounded-xl flex flex-col gap-2 p-2 w-3/4 mx-auto" onSubmit={onSubmit}>
-            <div className="text-red-500 font-bold text-3xl text-center">{title}</div>
+          <form
+            className="border rounded-xl flex flex-col gap-2 p-2 w-3/4 mx-auto"
+            onSubmit={onSubmit}
+          >
+            <div className="text-red-500 font-bold text-3xl text-center">
+              {title}
+            </div>
 
             {children}
 
-            {
-              pathname === '/register' ? (<Button loading={loading}>
-                {loading ? "Submitting..." : "Submit"}
-              </Button>) :
-                (<Button loading={loading}>
-                  {loading ? "Logging..." : "Login"}
-                </Button>)
-            }
+            {pathname === "/forgot-password" && (
+              <>
+                <Button loading={loading}>
+                  {loading ? "Submitting..." : "Submit"}
+                </Button>
+                <p className="text-sm m-0 text-center">
+                  <Link
+                    to="/login"
+                    className="text-xs underline cursor-pointer text-blue-500"
+                  >
+                    Back to Login
+                  </Link>
+                </p>
+              </>
+            )}
 
-            <p className="text-sm m-0 text-center">{
-              pathname === '/register'
-                ? <>Already have an account? <Link to='/login' className="text-xs underline cursor-pointer text-blue-500" >Login</Link></>
-                : <>Don't have an account? <Link to='/register' className="text-xs underline cursor-pointer text-blue-500" >Register</Link></>}</p>
+            {Elem}
           </form>
         </div>
       </div>
-  
-    </div>)
-  )
+    </div>
+  );
 }
 
-export default Form
+export default Form;
 
-function Button({ children,loading }) {
-  return <button className="border cursor-pointer h-10 rounded-sm mt-4 bg-red-400 hover:bg-red-500 font-semibold text-white" disabled={loading}>{children}</button>
+function Button({ children, loading }:{children: ReactNode, loading: boolean}) {
+  return (
+    <button
+      className="border cursor-pointer h-10 rounded-sm mt-4 bg-red-400 hover:bg-red-500 font-semibold text-white"
+      disabled={loading}
+    >
+      {children}
+    </button>
+  );
 }

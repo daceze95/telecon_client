@@ -12,6 +12,7 @@ export const instance = axios.create({
 
 export const capitalizeFirstCharOfWord = (text: string) => {
   let newText = "";
+  if(!text) return;
   const wordArr = text.split(" ");
 
   for (let i = 0; i < wordArr.length; i++) {

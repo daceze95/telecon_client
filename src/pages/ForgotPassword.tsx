@@ -1,23 +1,13 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import InputField from "../components/InputField";
-// import { KeyValueProps } from "../interfaces";
 import { apiPost } from "../utils/useApi";
 import Form from "../components/Form";
 import { useNavigate } from "react-router-dom";
-import { useDataContext } from "../contexts";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
-// import { ToastContainer } from "react-toastify";
 
-type LoginState = {
-  email: string;
-  password: string;
-};
-
-function Login() {
-  const { getUserData } = useDataContext();
-  const [state, setState] = useState<LoginState>({ email: "", password: "" });
-  // const [data, setData] = useState<{ message: string; data: KeyValueProps; status: boolean }>();
+function ForgotPassword() {
+  const [state, setState] = useState<{email: string}>({ email: ""});
   const [loading, isLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -30,10 +20,9 @@ function Login() {
     id: number;
     label: string;
     type: string;
-    name: keyof LoginState;
+    name: string;
   }[] = [
-    { id: 1, label: "Email", type: "email", name: "email" },
-    { id: 2, label: "Password", type: "password", name: "password" },
+    { id: 1, label: "Email", type: "email", name: "email" }
   ];
 
   useEffect(() => {}, []);
@@ -43,35 +32,29 @@ function Login() {
     isLoading(true);
 
     try {
-      const res = await apiPost(`/auth/login`, state);
-      setState({ email: "", password: "" });
+      const res = await apiPost(`/users/forgot-password`, state);
+      setState({ email: ""});
       isLoading(false);
-      const { fullName, email, verified, avatar } = res.data.data;
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({ fullName, email, verified, avatar })
-      );
-      localStorage.setItem("token", res.data.token);
-      getUserData({ fullName, email, verified, avatar });
-      toast.success(`Login successful`);
+      const temporaryPassword = res.data.data;
+      toast.success(`Check your email: ${temporaryPassword}`);
 
-      navigate("/", { replace: true });
+      navigate("/login", { replace: true });
     } catch (error) {
       const err = error as AxiosError;
-      toast.error(err?.message || "Login failed");
+      toast.error(err?.message || "Invalid password");
     } finally {
       isLoading(false);
     }
   };
 
   return (
-    <Form title={"Login"} onSubmit={handleSubmit} loading={loading}>
+    <Form title={"Forgot Password"} onSubmit={handleSubmit} loading={loading}>
       {formFields.map((formField) => (
         <InputField
           label={formField.label}
           type={formField.type}
           name={formField.name}
-          value={state[formField.name]}
+        //   value={formField.name}
           onChange={handleChange}
           className="border p-2 rounded-sm bg-transparent outline-slate-400"
           key={formField.id}
@@ -81,7 +64,7 @@ function Login() {
   );
 }
 
-export default Login;
+export default ForgotPassword;
 
 
 
